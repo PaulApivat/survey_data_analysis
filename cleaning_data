@@ -1,0 +1,64 @@
+*** NAMES OMITTED FOR CONFIDENTIALITY ***
+
+getwd() ##working directory
+
+## set working directory to org_analysis
+setwd("~/Desktop/org_analysis")
+
+## main file is org5.csv
+read.csv("~/Desktop/org_analysis/org5.csv")
+
+org6 <- read.csv("~/Desktop/org_analysis/org5.csv")  ##save to 'org' object
+
+length(org6)  ##how many columns
+dim(org6)     ##how many rows and columns - - 26 rows, 146 columns
+str(org6, list.len = ncol(org6))  ## describe data w no variable limits
+
+##print out variable names BEFORE changing names
+names(org6)  
+
+##NOTE: change ALL column names and store in x
+x <- org6[1:146]
+
+colnames(x) <- c("T1","DEM1","DEM2", "DEM3","DEM4","E1","E2","E3",                                                                                       
+                 "E4","F1","OCB1","OCB2","OCB3","OCB4","F2","UWES1","UWES2","UWES3",                                                                                                                                            
+                 "UWES4","UWES5", "UWES6","F3","ENPS", "F4","IS1","IS2","IS3","IS4",                                                                                                                      
+                 "F5","QP1","QP2","QP3","F6","QP4","F7","AE1","AE2","AE3","AE4","F8",                                                                                                                                         
+                 "CP1","CP2","CP3","CP4","F9","CT1","CT2","CT3","CT4","F10","OCI1","OCI2",                                                                                                                            
+                 "OCI3","OCI4","F11","C1","C2","C3","C4", "F12","OI1","OI2","OI3","F13",                                                                                                                                   
+                 "LM1","LM2","LM3","LM4","LM5","LM6","LM7","LM8","F14","SA1","SA2","SA3",                                                                                            
+                 "SA4","F15","CB1","CB2","CB3","CB4","F16","RC1", "RC2","RC3","RC4","F17","RE1",                                                                 
+                 "RE2","RE3","F18","SY1","SY2","F19","MS1","MS2","MS3","MS4","F20","TD1",                                                                                                          
+                 "TD2", "TD3","TD4","F21","WLB1","WLB2", "WLB3","WLB4","F22","BO1","BO2","BO3",                                                                                                                              
+                 "F23", "DI1","DI2","DI3","DI4","F24","GE1","GE2","GE3","GE4", "F25",                                                                                                                                           
+                 "HB1", "HB2","F26","HB3","HB4","F27","HBW1","HBW2","HBW3","HBW4","F28",                                                                                                                                          
+                 "AM1","AM2","AM3","F29","OPEN1","OPEN2","OPEN3","DEM5","DEM6","DEM7","DEM8")
+
+names(x)  ## double-check that variable names have changed
+str(x, list.len = ncol(x))   ## describe data w no variable limits
+summary(x)
+
+### CODED DEMOGRAPHIC VARIABLES INTO NUMBERS--so should be more numeric numbers ###
+
+## SELECTING ONLY NUMERIC COLUMNS FROM data.frame x and store in 'y'
+y <- Filter(is.numeric, x)   
+dim(y)  ## formerly 105 variables  now 113
+### AFTER coded DEMOGRAPHIC 113 variables (8 additional demographic variables)
+
+## NEED TO HANDLE MISSING DATA
+
+complete.cases(y) ##DETECTS rows in data.frame y that does NOT contain any missing value
+
+## May 20th, 2018, 8 of 24 people had missing data
+## June 19th, 2018, 16 of 26 people had missing data
+
+## REPLACE MISSING VALUES WITH COLUMN MEAN
+
+## try storing in another value instead of 'y' (e.g., 'z')
+for (i in 1:ncol(y)) {
+        +     y[is.na(y[,i]), i] <- mean(y[,i], na.rm = TRUE)
+        + }
+
+## Re-check this Replaced Missing Values with Column Mean works
+
+complete.cases(y) ## return all TRUE
