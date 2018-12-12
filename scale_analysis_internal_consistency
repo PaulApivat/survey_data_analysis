@@ -1,0 +1,105 @@
+## ** pick up here **
+
+str(y, list.len = ncol(y))  ## y is already a data.frame 26 obs. of  113 variables ALL NUMERIC
+
+### Cronbach's Alpha [MINIMUM CRONBACH's ALPHA 0.70]
+library(psy)  ##load psy
+
+### For reference names(y) ### variable now is 113
+names(y)
+[1] "DEM1"  "DEM2"  "DEM3"  "DEM4"  "E1"    "E2"    "E3"    "E4"    "OCB1" 
+[10] "OCB2"  "OCB3"  "OCB4"  "UWES1" "UWES2" "UWES3" "UWES4" "UWES5" "UWES6"
+[19] "ENPS"  "IS1"   "IS2"   "IS3"   "IS4"   "QP1"   "QP2"   "QP3"   "QP4"  
+[28] "AE1"   "AE2"   "AE3"   "AE4"   "CP1"   "CP2"   "CP3"   "CP4"   "CT1"  
+[37] "CT2"   "CT3"   "CT4"   "OCI1"  "OCI2"  "OCI3"  "OCI4"  "C1"    "C2"   
+[46] "C3"    "C4"    "OI1"   "OI2"   "OI3"   "LM1"   "LM2"   "LM3"   "LM4"  
+[55] "LM5"   "LM6"   "LM7"   "LM8"   "SA1"   "SA2"   "SA3"   "SA4"   "CB1"  
+[64] "CB2"   "CB3"   "CB4"   "RC1"   "RC2"   "RC3"   "RC4"   "RE1"   "RE2"  
+[73] "RE3"   "SY1"   "SY2"   "MS1"   "MS2"   "MS3"   "MS4"   "TD1"   "TD2"  
+[82] "TD3"   "TD4"   "WLB1"  "WLB2"  "WLB3"  "WLB4"  "BO1"   "BO2"   "BO3"  
+[91] "DI1"   "DI2"   "DI3"   "DI4"   "GE1"   "GE2"   "GE3"   "GE4"   "HB1"  
+[100] "HB2"   "HB3"   "HB4"   "HBW1"  "HBW2"  "HBW3"  "HBW4"  "AM1"   "AM2"  
+[109] "AM3"   "DEM5"  "DEM6"  "DEM7"  "DEM8" 
+
+
+
+##### Cronbach’s Alpha at n = 26 ALL SCALES (excluding Demographics)
+cronbach(y[5:8])   ##"E1"    "E2"    "E3"    "E4"     # 0.7812291 <ENG>
+cronbach(y[9:12])   ##"OCB1"  "OCB2"  "OCB3"  "OCB4"   # 0.5855618 <OCB> *low*
+cronbach(y[13:18]) ##"UWES1" "UWES2" "UWES3" "UWES4" "UWES5" "UWES6"   #0.7249894  <UWES>
+cronbach(y[20:23]) ## "IS1"   "IS2"   "IS3"  "IS4"     # 0.8689723  <IS>
+y[19] ##ENPS *single item
+cronbach(y[24:27]) ## "QP1"   "QP2"   "QP3"   "QP4"    # 0.7109442  <QP>
+cronbach(y[28:31]) ## "AE1"   "AE2"   "AE3"   "AE4"    # 0.8763441  <AE>
+cronbach(y[32:35]) ## "CP1"   "CP2"   "CP3"   "CP4"    # 0.8686359  <CP>
+cronbach(y[36:39]) ## "CT1"   "CT2"   "CT3"   "CT4"    # 0.6584055  <CT>
+cronbach(y[40:43]) ## "OCI1" "OCI2"  "OCI3"  "OCI4"    # 0.7749895  <OCI>
+cronbach(y[44:47]) ## "C1"    "C2"    "C3"    "C4"     # 0.8191824  <C>
+cronbach(y[48:50]) ## "OI1"   "OI2"   "OI3"            # 0.7673581  <OI>
+cronbach(y[51:58]) ## "LM1"   "LM2"   "LM3"   "LM4"   "LM5"   "LM6"   "LM7"   "LM8"     # 0.9239462  <LM>
+cronbach(y[59:62]) ## "SA1"   "SA2"   "SA3"   "SA4"    # 0.8212996  <SA>
+cronbach(y[63:66]) ## "CB1"   "CB2"   "CB3"   "CB4"    # 0.8432259  <CB>
+cronbach(y[67:70]) ## "RC1"   "RC2"   "RC3"   "RC4"    # 0.7711203  <RC>
+cronbach(y[71:73]) ## "RE1"   "RE2"   "RE3"            # 0.4926764  <RE> **very low**
+cronbach(y[74:75]) ## "SY1"   "SY2"                    # 0.8684547  <SY>
+cronbach(y[76:79]) ## "MS1"   "MS2"   "MS3"   "MS4"    # 0.6666667  <MS>
+cronbach(y[80:83]) ## "TD1"   "TD2"   "TD3"   "TD4"    # 0.6419948  <TD>
+cronbach(y[84:87]) ## "WLB1"  "WLB2"  "WLB3"  "WLB4"   # 0.771453  <WLB>
+cronbach(y[88:90]) ##  "BO1"   "BO2"   "BO3"           # 0.7018162   **much better after reverse code  <BO>
+cronbach(y[91:94]) ##  "DI1"   "DI2"   "DI3"   "DI4"   # 0.7840989  <DI>
+cronbach(y[95:98]) ##  "GE1"   "GE2"   "GE3"   "GE4"   # 0.6708816   **much better after reverse code <GE>
+cronbach(y[99:102]) ##  "HB1"   "HB2"   "HB3"   "HB4"   # 0.6615448  <HB>
+cronbach(y[103:106]) ## "HBW1"  "HBW2"  "HBW3"  "HBW4"  # 0.7764956  <HBW>
+cronbach(y[107:109])  ## "AM1"   "AM2"   "AM3"         # 0.6905424  <AM>
+
+### Simply create NEW VARIABLES (composite)
+##create Scoring Keys - see PDF "Using R to score personality scales"
+
+library(psych)  #load first
+# Short Example #
+> my.keys.list <- list(ENG = c("E1", "E2", "E3", "E4"))
+> my.scales <- scoreItems(my.keys.list, y)
+> my.scales
+
+#### Entire Key List - - my.keys.listX ####
+my.keys.listX <- list(ENG = c("E1", "E2", "E3", "E4"), OCB = c("OCB1","OCB2","OCB3","OCB4"), UWES = c("UWES1","UWES2","UWES3","UWES4","UWES5","UWES6"), IS = c("IS1","IS2","IS3","IS4"), QP = c("QP1","QP2","QP3","QP4"), AE = c("AE1","AE2","AE3","AE4"), CP = c("CP1","CP2","CP3","CP4"), CT = c("CT1","CT2","CT3","CT4"), OCI = c("OCI1","OCI2","OCI3","OCI4"), C = c("C1","C2","C3","C4"), OI = c("OI1","OI2","OI3" ), LM = c("LM1","LM2","LM3","LM4","LM5","LM6","LM7","LM8"), SA = c("SA1","SA2","SA3","SA4"), CB = c("CB1","CB2","CB3","CB4"), RC = c("RC1","RC2","RC3","RC4"), RE = c("RE1","RE2","RE3"), SY = c("SY1","SY2"), MS = c("MS1","MS2","MS3","MS4"), TD = c("TD1","TD2","TD3","TD4"), WLB = c("WLB1","WLB2","WLB3","WLB4"), BO = c("BO1","BO2","BO3"), DI = c("DI1","DI2","DI3","DI4"), GE = c("GE1","GE2","GE3","GE4"), HB = c("HB1","HB2","HB3","HB4"), HBW = c("HBW1","HBW2","HBW3","HBW4"), AM = c("AM1","AM2","AM3")) 
+
+#### Interitem Correlations & Cronbachs' alpha ####
+my.scalesX <- scoreItems(my.keys.listX, y)   ## then call my.scalesX
+my.scalesX   ## call
+
+str(my.keys.listX)  ##quick summary
+
+### results from calling my.scalesX - Interitem Correlation & Cronbach's Alpha ###
+
+###Cronbach Alpha
+(Unstandardized) Alpha:
+##        ENG  OCB UWES   IS   QP   AE   CP   CT  OCI    C   OI   LM   SA   CB   RC   RE   SY   MS
+## alpha 0.78 0.59 0.72 0.87 0.71 0.88 0.87 0.66 0.77 0.82 0.77 0.92 0.82 0.84 0.77 0.49 0.87 0.67
+##         TD  WLB  BO   DI   GE   HB  HBW   AM
+## alpha 0.64 0.77 0.7 0.78 0.67 0.66 0.78 0.69
+        
+### Interpreting Cronbach Alpha: 
+### In other words, the higher the α coefficient, 
+### the more the items have shared covariance and probably measure the same underlying concept.
+### many methodologists recommend a minimum α coefficient between 0.65 and 0.8 (or higher in many cases); 
+### α coefficients that are less than 0.5 are usually unacceptable, especially for scales purporting to be unidimensional (but see Section III for more on dimensionality).
+### (with an acceptable alpha) I feel comfortable saying that these items do indeed tap into an underlying construct.
+### Cronbach’s alpha is NOT a measure of dimensionality, nor a test of unidimensionality (of said construct).
+### Cronbach's alpha IS a measure of Reliability, NOT Validity; 
+### In short, you’ll need more than a simple test of reliability to fully assess how “good” a scale is at measuring a concept.
+
+### AVERAGE ITEM CORRELATION:
+### Average item correlation:
+###        ENG  OCB UWES   IS   QP   AE   CP   CT  OCI    C   OI  LM   SA   CB   RC   RE   SY   MS
+average.r 0.47 0.26 0.31 0.62 0.38 0.64 0.62 0.33 0.46 0.53 0.52 0.6 0.53 0.57 0.46 0.24 0.77 0.33
+###         TD  WLB   BO   DI   GE   HB  HBW   AM
+average.r 0.31 0.46 0.44 0.48 0.34 0.33 0.46 0.43
+
+### In several studies, total item correlation serves as a criterion for initial assessment and purification
+### Various cut-off points are adopted:
+0.30 by Cristobal et al. (2007),
+0.40 by Loiacono et al. (2002), 
+0.50 by Francis and White (2002) and Kim and Stoel (2004)
+
+### scales that Do NOT pass the Average Item Correlation test are OCB, RE; not surprising given low cronbach alpha ###
