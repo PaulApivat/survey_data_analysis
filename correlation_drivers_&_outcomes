@@ -1,0 +1,134 @@
+
+##### To run actual correlation, need to create NEW variables
+#######NOTE : NEED to convert to DATA.FRAME!!!
+
+eng <- (y$E1+y$E2+y$E3+y$E4)/4
+ocb <- (y$OCB1+y$OCB2+y$OCB3+y$OCB4)/4
+uwes <- (y$UWES1+y$UWES2+y$UWES3+y$UWES4+y$UWES5+y$UWES6)/6
+is <- (y$IS1+y$IS2+y$IS3+y$IS4)/4
+# enps <- y$ENPS *single item
+qp <- (y$QP1+y$QP2+y$QP3+y$QP4)/4
+ae <- (y$AE1+y$AE2+y$AE3+y$AE4)/4
+cp <- (y$CP1+y$CP2+y$CP3+y$CP4)/4
+ct <- (y$CT1+y$CT2+y$CT3+y$CT4)/4
+oci <- (y$OCI1+y$OCI2+y$OCI3+y$OCI4)/4
+c <- (y$C1+y$C2+y$C3+y$C4)/4
+oi <- (y$OI1+y$OI2+y$OI3)/3
+lm <- (y$LM1+y$LM2+y$LM3+y$LM4+y$LM5+y$LM6+y$LM7+y$LM8)/8
+sa <- (y$SA1+y$SA2+y$SA3+y$SA4)/4
+cb <- (y$CB1+y$CB2+y$CB3+y$CB4)/4
+rc <- (y$RC1+y$RC2+y$RC3+y$RC4)/4
+re <- (y$RE1+y$RE2+y$RE3)/3
+sy <- (y$SY1+y$SY2)/2
+ms <- (y$MS1+y$MS2+y$MS3+y$MS4)/4
+td <- (y$TD1+y$TD2+y$TD3+y$TD4)/4
+wlb <- (y$WLB1+y$WLB2+y$WLB3+y$WLB4)/4
+bo <- (y$BO1+y$BO2+y$BO3)/3
+di <- (y$DI1+y$DI2+y$DI3+y$DI4)/4
+ge <- (y$GE1+y$GE2+y$GE3+y$GE4)/4
+hb <- (y$HB1+y$HB2+y$HB3+y$HB4)/4
+hbw <- (y$HBW1+y$HBW2+y$HBW3+y$HBW4)/4
+am <- (y$AM1+y$AM2+y$AM3)/3
+
+dem1 <- (y$DEM1) ## STATUS: Are you currently working at ORG as of April 15, 2018?
+dem2 <- (y$DEM2) ## TEAM/REGION: Which of the following best describes the team you work in?
+dem3 <- (y$DEM3) ## POSITION: Which of the following best describes your position here?
+dem4 <- (y$DEM4) ## TENURE: How long have you worked at ORG 
+dem5 <- (y$DEM5) ## RACE/ETHNICITY: I identify my race and ethnic background as (select all that apply)
+dem6 <- (y$DEM6) ## GENDER: Please indicate your gender
+dem7 <- (y$DEM7) ## AGE: Please indicate your age
+dem8 <- (y$DEM8) ## PROMOTIONS: How many promotions have you had in the last 2 years?
+
+##### NEED TO CREATE "new variables" for DEMOGRAPHICS 
+### For reference names(y) ### variable now is 113
+names(y)
+[1] "DEM1"  "DEM2"  "DEM3"  "DEM4"  "E1"    "E2"    "E3"    "E4"    "OCB1" 
+[10] "OCB2"  "OCB3"  "OCB4"  "UWES1" "UWES2" "UWES3" "UWES4" "UWES5" "UWES6"
+[19] "ENPS"  "IS1"   "IS2"   "IS3"   "IS4"   "QP1"   "QP2"   "QP3"   "QP4"  
+[28] "AE1"   "AE2"   "AE3"   "AE4"   "CP1"   "CP2"   "CP3"   "CP4"   "CT1"  
+[37] "CT2"   "CT3"   "CT4"   "OCI1"  "OCI2"  "OCI3"  "OCI4"  "C1"    "C2"   
+[46] "C3"    "C4"    "OI1"   "OI2"   "OI3"   "LM1"   "LM2"   "LM3"   "LM4"  
+[55] "LM5"   "LM6"   "LM7"   "LM8"   "SA1"   "SA2"   "SA3"   "SA4"   "CB1"  
+[64] "CB2"   "CB3"   "CB4"   "RC1"   "RC2"   "RC3"   "RC4"   "RE1"   "RE2"  
+[73] "RE3"   "SY1"   "SY2"   "MS1"   "MS2"   "MS3"   "MS4"   "TD1"   "TD2"  
+[82] "TD3"   "TD4"   "WLB1"  "WLB2"  "WLB3"  "WLB4"  "BO1"   "BO2"   "BO3"  
+[91] "DI1"   "DI2"   "DI3"   "DI4"   "GE1"   "GE2"   "GE3"   "GE4"   "HB1"  
+[100] "HB2"   "HB3"   "HB4"   "HBW1"  "HBW2"  "HBW3"  "HBW4"  "AM1"   "AM2"  
+[109] "AM3"   "DEM5"  "DEM6"  "DEM7"  "DEM8" 
+
+### TYPE CONVERSTION needed ###
+
+## Source: https://www.statmethods.net/management/typeconversion.html
+
+outc <- data.frame(eng, uwes, is, enps, ocb,  ##outc[1:5]
+                   qp, ae, cp, ct, oci, c, oi, lm, sa, cb, rc, re, sy, ms, td, wlb, bo,   ##outc[6:22]
+                   di, ge, hb, hbw, am, dem1, dem2, dem3, dem4, dem5, dem6, dem7, dem8)  ### outc[23:35]
+
+### str(outc) data.frame 26 obs. of  35 variables
+
+corr.test(outc[1:5]) ##### NOW THIS WORKS - CORRELATION AMONG ALL OUTCOME VARIABLES
+Correlation matrix 
+       eng uwes    is  enps   ocb
+eng   1.00 0.57  0.82  0.83 -0.22
+uwes  0.57 1.00  0.45  0.45  0.05
+is    0.82 0.45  1.00  0.74 -0.46
+enps  0.83 0.45  0.74  1.00 -0.28
+ocb  -0.22 0.05 -0.46 -0.28  1.00
+Sample Size 
+[1] 26
+
+
+
+#### Correlation of ALL DRIVERS including Demographics outc[6:22] #####
+corr.test(outc[6:22])
+Call:corr.test(x = outc[6:22])
+Correlation matrix 
+      qp   ae   cp   ct  oci    c   oi   lm   sa   cb   rc   re   sy   ms   td  wlb   bo
+qp  1.00 0.21 0.33 0.16 0.42 0.40 0.56 0.47 0.51 0.38 0.40 0.12 0.34 0.25 0.70 0.11 0.18
+ae  0.21 1.00 0.63 0.59 0.42 0.79 0.51 0.58 0.51 0.50 0.58 0.47 0.30 0.56 0.45 0.57 0.45
+cp  0.33 0.63 1.00 0.53 0.28 0.55 0.49 0.52 0.57 0.48 0.60 0.33 0.12 0.64 0.69 0.37 0.37
+ct  0.16 0.59 0.53 1.00 0.59 0.64 0.55 0.48 0.41 0.63 0.41 0.55 0.20 0.56 0.32 0.51 0.53
+oci 0.42 0.42 0.28 0.59 1.00 0.53 0.61 0.57 0.57 0.60 0.44 0.44 0.45 0.41 0.43 0.37 0.37
+c   0.40 0.79 0.55 0.64 0.53 1.00 0.63 0.69 0.57 0.56 0.34 0.57 0.22 0.48 0.55 0.42 0.60
+oi  0.56 0.51 0.49 0.55 0.61 0.63 1.00 0.67 0.64 0.55 0.48 0.42 0.16 0.55 0.56 0.34 0.50
+lm  0.47 0.58 0.52 0.48 0.57 0.69 0.67 1.00 0.80 0.41 0.58 0.23 0.47 0.53 0.62 0.34 0.32
+sa  0.51 0.51 0.57 0.41 0.57 0.57 0.64 0.80 1.00 0.48 0.59 0.26 0.40 0.60 0.74 0.40 0.48
+cb  0.38 0.50 0.48 0.63 0.60 0.56 0.55 0.41 0.48 1.00 0.45 0.74 0.51 0.51 0.48 0.72 0.73
+rc  0.40 0.58 0.60 0.41 0.44 0.34 0.48 0.58 0.59 0.45 1.00 0.18 0.51 0.59 0.51 0.37 0.24
+re  0.12 0.47 0.33 0.55 0.44 0.57 0.42 0.23 0.26 0.74 0.18 1.00 0.17 0.43 0.29 0.42 0.62
+sy  0.34 0.30 0.12 0.20 0.45 0.22 0.16 0.47 0.40 0.51 0.51 0.17 1.00 0.27 0.28 0.43 0.23
+ms  0.25 0.56 0.64 0.56 0.41 0.48 0.55 0.53 0.60 0.51 0.59 0.43 0.27 1.00 0.55 0.50 0.64
+td  0.70 0.45 0.69 0.32 0.43 0.55 0.56 0.62 0.74 0.48 0.51 0.29 0.28 0.55 1.00 0.35 0.37
+wlb 0.11 0.57 0.37 0.51 0.37 0.42 0.34 0.34 0.40 0.72 0.37 0.42 0.43 0.50 0.35 1.00 0.68
+bo  0.18 0.45 0.37 0.53 0.37 0.60 0.50 0.32 0.48 0.73 0.24 0.62 0.23 0.64 0.37 0.68 1.00
+Sample Size 
+[1] 26
+
+#### CONTINUE: Correlation of ALL DRIVERS including Demographics outc[23:35] #####
+
+corr.test(outc[23:35])
+Call:corr.test(x = outc[23:35])
+Correlation matrix 
+        di    ge    hb   hbw    am  dem1  dem2  dem3  dem4  dem5  dem6  dem7  dem8
+di    1.00  0.34 -0.36 -0.05  0.49 -0.17  0.03  0.24  0.25 -0.11 -0.30 -0.23  0.18
+ge    0.34  1.00 -0.44 -0.34  0.50 -0.27 -0.21  0.16  0.09  0.25  0.37  0.48  0.22
+hb   -0.36 -0.44  1.00  0.38 -0.37  0.39  0.07 -0.36 -0.26 -0.14  0.08 -0.04 -0.33
+hbw  -0.05 -0.34  0.38  1.00 -0.08  0.46  0.36 -0.30 -0.16  0.19 -0.12 -0.19 -0.13
+am    0.49  0.50 -0.37 -0.08  1.00 -0.17 -0.26  0.55  0.07 -0.06  0.03  0.11  0.50
+dem1 -0.17 -0.27  0.39  0.46 -0.17  1.00  0.45 -0.22 -0.06  0.12  0.04 -0.10 -0.15
+dem2  0.03 -0.21  0.07  0.36 -0.26  0.45  1.00 -0.04  0.13  0.28  0.00 -0.13 -0.25
+dem3  0.24  0.16 -0.36 -0.30  0.55 -0.22 -0.04  1.00  0.49  0.08 -0.22 -0.15  0.33
+dem4  0.25  0.09 -0.26 -0.16  0.07 -0.06  0.13  0.49  1.00  0.28 -0.13 -0.05  0.06
+dem5 -0.11  0.25 -0.14  0.19 -0.06  0.12  0.28  0.08  0.28  1.00  0.37  0.39  0.06
+dem6 -0.30  0.37  0.08 -0.12  0.03  0.04  0.00 -0.22 -0.13  0.37  1.00  0.94 -0.08
+dem7 -0.23  0.48 -0.04 -0.19  0.11 -0.10 -0.13 -0.15 -0.05  0.39  0.94  1.00 -0.13
+dem8  0.18  0.22 -0.33 -0.13  0.50 -0.15 -0.25  0.33  0.06  0.06 -0.08 -0.13  1.00
+Sample Size 
+[1] 26
+
+### See correlation matrix in excel (copy from text --> excel)
+### Step1: Copy & Paste from R-to-Excel
+### Step2: (in Excel 'Data' tab) click "Text-to-Columns"
+### Step3: Next, Next, Next, Finish
+
+#### 
